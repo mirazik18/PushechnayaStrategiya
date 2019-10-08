@@ -1,1 +1,2 @@
-# PushechnayaStrategiya
+# PushechnayaStrategiya по ставкам, НОВЫЙ УРОВЕНЬ ТЕЛЕГРАММ БОТ.
+Абдишев Мирас
