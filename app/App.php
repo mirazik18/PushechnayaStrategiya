@@ -1,27 +1,28 @@
 <?php
 
 use Core\Config;
-use Core\Telegram;
 use Models\UpdatesHandler;
 use Telegram\Bot\Api;
 
-
 class App {
+
+    private $telegram;
 
     public function __construct()
     {
 
-//        Telegram::init(Config::telegram());
-//        Telegram::handle();
-
         $cfg = Config::telegram();
-        $api = new Api($cfg["token"]);
-        $api->addCommands($cfg["commands"]);
-        $updates = $api->commandsHandler(false);
 
-        new UpdatesHandler($api, $updates);
+        $this->telegram = new Api($cfg["token"]);
+        $this->telegram->addCommands($cfg["commands"]);
+
     }
 
+    public function loop() {
 
+        $updates = $this->telegram->commandsHandler(false);
+        new UpdatesHandler($this->telegram, $updates);
+
+    }
 
 }

@@ -2,7 +2,6 @@
 
 namespace Core;
 
-
 use Telegram\Bot\Api;
 
 class Telegram
@@ -26,11 +25,6 @@ class Telegram
             new self($cfg);
     }
 
-    static function getUpdates(array $params = [], $shouldEmitEvents = true)
-    {
-        return self::$instance->getUpdates($params, $shouldEmitEvents);
-    }
-
     static function sendMessage($chat_id, $message) {
         return self::$instance
             ->sendMessage([
@@ -41,36 +35,9 @@ class Telegram
 
     static function handle() {
 
-    
-        $updates = self::$instance->commandsHandler(false);
+        $updates = self::$instance
+            ->commandsHandler(false);
 
-       
-//        $updates = self::getUpdates([
-//            "offset" => $update_id + 1
-//        ]);
-//
-//        $max = 0;
-//
-//        foreach ($updates as $update) {
-//
-//
-//            self::setLastUpdateId($update["update_id"]);
-//            self::$instance
-//                ->commandsHandler(false);
-//
-//
-//        }
-
-        
-
-    }
-
-    static function getLastUpdateId() {
-        return file_get_contents(Config::telegram("update_id_file"));
-    }
-
-    static function setLastUpdateId($id) {
-        file_put_contents(Config::telegram("update_id_file"), $id);
     }
 
 }

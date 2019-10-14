@@ -18,23 +18,19 @@ class HelpCommand extends Command
     protected $name = "help";
     protected $description = "This is help";
 
-    public function handle()
+    public function handle($args)
     {
-        $response = '';
-
+        $response = 'Commands: ' . PHP_EOL;
         $commands = $this->getTelegram()->getCommands();
-
         foreach ($commands as $command) {
-
             $response .= "/" . $command->getName() . " - ";
             $response .= $command->getDescription() . PHP_EOL;
-
         }
-
-        $this
-            ->replyWithMessage([
-                "text" => $response
-            ]);
+        $chat_id = $this->getUpdate()->getMessage()->getChat()->getId();
+        $this->getTelegram()->sendMessage([
+            "chat_id" => $chat_id,
+            "text" => $response
+        ]);
     }
 
 }

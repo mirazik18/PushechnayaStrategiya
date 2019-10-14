@@ -10,10 +10,10 @@ return [
         StartCommand::class,
         HelpCommand::class
     ],
-    "update_id_file" => Helpers::path("data", "update_id.txt"),
-    "keyboard"=>[
+
+    "keyboard" => [
         ["one", "two", "three"],
         ["one", "two"],
-        ["one"]
-    ]
+        ["one"],
+    ],
 ];

@@ -11,13 +11,14 @@ class StartCommand extends Command
     protected $name = "start";
     protected $description = "Start Command to get you started";
 
-    public function handle()
+    public function handle($args)
     {
-        $this
-            ->replyWithMessage([
-                'text' => 'Hello! Welcome to our bot, Here are our available commands:'
-            ]);
-
+        $message = "Hello! Welcome to our bot, Here are our available commands:";
+        $chat_id = $this->getUpdate()->getMessage()->getChat()->getId();
+        $this->getTelegram()->sendMessage([
+            "chat_id" => $chat_id,
+            "text" => $message
+        ]);
         $this->triggerCommand('help');
 
     }
